@@ -42,14 +42,12 @@
     addItem.name = [NSString stringWithFormat:@"sample %d", count];
     count++;
     
-    // どの行が選択されているか
+    // どの行が選択されているか（行が選択されていないときは-1）
     NSInteger row = _toDoListTableView.selectedRow;
     if (row == -1) {
-        row = 0;    // 行が選択されていないときは-1
+        row = 0;
     }
     [_toDoItems insertObject:addItem atIndex:row];
-    
-//    [_toDoItems addObject:addItem];
     _toDoItemsController.content = _toDoItems;
 }
 
