@@ -12,6 +12,8 @@
 		D0C07375224AF61E005B23FC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C07373224AF61E005B23FC /* MainMenu.xib */; };
 		D0C07378224AF61E005B23FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C07377224AF61E005B23FC /* main.m */; };
 		D0C07381224AF691005B23FC /* ToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C07380224AF691005B23FC /* ToDoItem.m */; };
+		D0C07388224AFE87005B23FC /* ToDoListWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C07386224AFE87005B23FC /* ToDoListWindowController.m */; };
+		D0C07389224AFE87005B23FC /* ToDoListWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C07387224AFE87005B23FC /* ToDoListWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,9 @@
 		D0C07379224AF61E005B23FC /* ToDoList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoList.entitlements; sourceTree = "<group>"; };
 		D0C0737F224AF691005B23FC /* ToDoItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToDoItem.h; sourceTree = "<group>"; };
 		D0C07380224AF691005B23FC /* ToDoItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToDoItem.m; sourceTree = "<group>"; };
+		D0C07385224AFE87005B23FC /* ToDoListWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToDoListWindowController.h; sourceTree = "<group>"; };
+		D0C07386224AFE87005B23FC /* ToDoListWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToDoListWindowController.m; sourceTree = "<group>"; };
+		D0C07387224AFE87005B23FC /* ToDoListWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToDoListWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +66,9 @@
 				D0C0736F224AF61B005B23FC /* AppDelegate.m */,
 				D0C0737F224AF691005B23FC /* ToDoItem.h */,
 				D0C07380224AF691005B23FC /* ToDoItem.m */,
+				D0C07385224AFE87005B23FC /* ToDoListWindowController.h */,
+				D0C07386224AFE87005B23FC /* ToDoListWindowController.m */,
+				D0C07387224AFE87005B23FC /* ToDoListWindowController.xib */,
 				D0C07371224AF61E005B23FC /* Assets.xcassets */,
 				D0C07373224AF61E005B23FC /* MainMenu.xib */,
 				D0C07376224AF61E005B23FC /* Info.plist */,
@@ -127,6 +135,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0C07389224AFE87005B23FC /* ToDoListWindowController.xib in Resources */,
 				D0C07372224AF61E005B23FC /* Assets.xcassets in Resources */,
 				D0C07375224AF61E005B23FC /* MainMenu.xib in Resources */,
 			);
@@ -142,6 +151,7 @@
 				D0C07381224AF691005B23FC /* ToDoItem.m in Sources */,
 				D0C07378224AF61E005B23FC /* main.m in Sources */,
 				D0C07370224AF61B005B23FC /* AppDelegate.m in Sources */,
+				D0C07388224AFE87005B23FC /* ToDoListWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
