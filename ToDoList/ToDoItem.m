@@ -14,7 +14,7 @@
     self = [super init];
     if (self) {
         _isChecked = NO;
-        _priority  = kPriorityIsMiddle;
+        _priority  = @"nil";
         _name      = @"new item";
         _place     = @"place";
         _startDate = [NSDate date];

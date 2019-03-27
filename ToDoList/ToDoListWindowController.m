@@ -12,6 +12,7 @@
 @interface ToDoListWindowController ()
 @property NSMutableArray<ToDoItem *> *toDoItems;
 @property (weak) IBOutlet NSTableView *toDoListTableView;
+@property (nonatomic, readonly) AddItemWindowController *addItemWindowController;
 @end
 
 @implementation ToDoListWindowController
@@ -54,18 +55,10 @@
  @brief 項目を追加するボタン押下時
  */
 - (IBAction)addToDoListItem:(id)sender {
-    static int count = 0;
-    ToDoItem *addItem = [ToDoItem new];
-    addItem.name = [NSString stringWithFormat:@"sample %d", count];
-    count++;
-    
-    // どの行が選択されているか（行が選択されていないときは-1）
-    NSInteger row = _toDoListTableView.selectedRow;
-    if (row == -1) {
-        row = 0;
-    }
-    [_toDoItems insertObject:addItem atIndex:row];
-    [_toDoListTableView reloadData];
+    AddItemWindowController *addItemWindowController = [[AddItemWindowController alloc] initWithToDoItem:nil];
+    addItemWindowController.delegate = self;
+    [addItemWindowController showWindow:self];
+    _addItemWindowController = addItemWindowController;
 }
 
 /**
@@ -100,8 +93,25 @@
     // どの行が選択されているか
     NSInteger row = [_toDoListTableView rowForView:sender];
     NSLog(@"%ld", (long)row);
+    
+    AddItemWindowController *addItemWindowController = [[AddItemWindowController alloc] initWithToDoItem:_toDoItems[row]];
+    addItemWindowController.delegate = self;
+    [addItemWindowController showWindow:self];
+    _addItemWindowController = addItemWindowController;
 }
 
+#pragma mark - AddItemWindowControllerDelegate Methods
+
+- (void)AddItemWindowController:(AddItemWindowController *)addItemWindowController didOKWithToDoItem:(ToDoItem *)toDoItem {
+    [addItemWindowController close];
+    [_toDoItems addObject:toDoItem];
+    [_toDoListTableView reloadData];
+}
+
+- (void)AddItemWindowControllerDidCancel:(AddItemWindowController *)addItemWindowController {
+    [addItemWindowController close];
+    NSLog(@"項目の追加がキャンセルされました。");
+}
 
 
 @end

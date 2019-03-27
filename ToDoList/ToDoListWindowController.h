@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-@interface ToDoListWindowController : NSWindowController <NSTableViewDelegate,NSTableViewDataSource>
+#import "AddItemWindowController.h"
+@interface ToDoListWindowController : NSWindowController <NSTableViewDelegate,NSTableViewDataSource, AddItemWindowControllerDelegate>
 
 @end
