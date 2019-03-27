@@ -19,6 +19,7 @@
         _place     = @"place";
         _startDate = [NSDate date];
         _limitDate = [NSDate date];
+        _isEnableEditButton = YES;
     }
     return self;
 }

@@ -10,7 +10,7 @@
 #import "ToDoItem.h"
 
 @interface ToDoListWindowController ()
-@property NSMutableArray *toDoItems;
+@property NSMutableArray<ToDoItem *> *toDoItems;
 @property (weak) IBOutlet NSTableView *toDoListTableView;
 @end
 
@@ -85,10 +85,23 @@
     [_toDoListTableView reloadData];
 }
 
-- (IBAction)editToDoListItem:(id)sender {
-    // どの行が選択されているか
-    NSInteger row = _toDoListTableView.selectedRow;
-    NSLog(@"selectedRoe:%ld", (long)row);
+- (IBAction)checkBoxPushed:(id)sender {
+    // 選択されたチェックボックスはどの行か
+    NSInteger row = [_toDoListTableView rowForView:sender];
+    // 選択されている項目は空か
+    if (row < 0) {
+        NSBeep();
+        return;
+    }
+    _toDoItems[row].isChecked = !_toDoItems[row].isChecked;
 }
+
+- (IBAction)editSelectedToDoListItem:(id)sender {
+    // どの行が選択されているか
+    NSInteger row = [_toDoListTableView rowForView:sender];
+    NSLog(@"%ld", (long)row);
+}
+
+
 
 @end

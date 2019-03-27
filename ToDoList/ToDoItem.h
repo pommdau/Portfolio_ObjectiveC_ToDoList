@@ -24,5 +24,6 @@ typedef NS_ENUM (NSUInteger, kPriority) {
 @property NSString  *place;     // 場所
 @property NSDate    *startDate; // 開始日
 @property NSDate    *limitDate; // 期限日
+@property BOOL      isEnableEditButton; // Editボタンを有効にするかどうか
 
 @end
