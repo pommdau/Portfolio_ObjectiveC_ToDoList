@@ -11,7 +11,6 @@
 
 @interface ToDoListWindowController ()
 @property NSMutableArray *toDoItems;
-@property (strong) IBOutlet NSArrayController *toDoItemsController; // データとテーブルビューを結ぶ
 @property (weak) IBOutlet NSTableView *toDoListTableView;
 @end
 
@@ -23,7 +22,7 @@
         _toDoItems = [NSMutableArray array];
         ToDoItem *sample1 = [ToDoItem new];
         [_toDoItems addObject:sample1];
-        _toDoItemsController.content = _toDoItems;
+        [_toDoListTableView reloadData];
     }
     return self;
 }
@@ -34,8 +33,26 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
-#pragma mark - Button Action
+#pragma mark - NSTableView data source
 
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
+    return _toDoItems.count;
+}
+
+- (NSView *)tableView:(NSTableView *)tableView
+   viewForTableColumn:(NSTableColumn *)tableColumn
+                  row:(NSInteger)row{
+    NSString *identifier = tableColumn.identifier;
+    ToDoItem *data = _toDoItems[row];
+    NSTableCellView *cellView = [tableView makeViewWithIdentifier:identifier owner:self];
+    cellView.objectValue = [data valueForKey:identifier];
+    return cellView;
+}
+
+#pragma mark - Button Methods
+/**
+ @brief 項目を追加するボタン押下時
+ */
 - (IBAction)addToDoListItem:(id)sender {
     static int count = 0;
     ToDoItem *addItem = [ToDoItem new];
@@ -48,9 +65,12 @@
         row = 0;
     }
     [_toDoItems insertObject:addItem atIndex:row];
-    _toDoItemsController.content = _toDoItems;
+    [_toDoListTableView reloadData];
 }
 
+/**
+ @brief 項目を削除するボタン押下時
+ */
 - (IBAction)removeSelectedToDoListItem:(id)sender {
     // どの行が選択されているか
     NSIndexSet *rows = [_toDoListTableView selectedRowIndexes];
@@ -62,8 +82,13 @@
     }
     
     [_toDoItems removeObjectsAtIndexes:rows];
-    _toDoItemsController.content = _toDoItems;
+    [_toDoListTableView reloadData];
 }
 
+- (IBAction)editToDoListItem:(id)sender {
+    // どの行が選択されているか
+    NSInteger row = _toDoListTableView.selectedRow;
+    NSLog(@"selectedRoe:%ld", (long)row);
+}
 
 @end

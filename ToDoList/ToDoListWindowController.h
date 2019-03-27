@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ToDoListWindowController : NSWindowController
+@interface ToDoListWindowController : NSWindowController <NSTableViewDelegate,NSTableViewDataSource>
 
 @end
