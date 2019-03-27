@@ -11,6 +11,7 @@
 
 @interface ToDoListWindowController ()
 @property NSMutableArray *toDoItems;
+@property (strong) IBOutlet NSArrayController *toDoItemsController;
 @end
 
 @implementation ToDoListWindowController
@@ -18,6 +19,10 @@
 - (id)init {
     self = [super initWithWindowNibName:[self className] owner:self];
     if (self) {
+        _toDoItems = [NSMutableArray array];
+        ToDoItem *sample1 = [ToDoItem new];
+        [_toDoItems addObject:sample1];
+        _toDoItemsController.content = _toDoItems;
     }
     return self;
 }
