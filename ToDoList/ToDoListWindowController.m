@@ -86,6 +86,7 @@
  */
 - (IBAction)removeSelectedToDoListItem:(id)sender {
     // どの行が選択されているか
+    // TODO: 複数選択して削除したい
     NSIndexSet *rows = [_toDoListTableView selectedRowIndexes];
     
     // 選択されている項目は空か
@@ -94,6 +95,10 @@
         return;
     }
     [_toDoItems removeObjectsAtIndexes:rows];
+    
+    _editButton.enabled = NO;
+    _removeButton.enabled = NO;
+    
     [_toDoListTableView reloadData];
 }
 
