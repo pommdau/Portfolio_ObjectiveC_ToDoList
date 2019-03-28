@@ -86,7 +86,7 @@
         NSBeep();
         return;
     }
-    _toDoItems[row].isChecked = !_toDoItems[row].isChecked;
+    [_toDoItems[row] toggleChecked];
 }
 
 - (IBAction)editSelectedToDoListItem:(id)sender {
@@ -110,7 +110,6 @@
 
 - (void)AddItemWindowControllerDidCancel:(AddItemWindowController *)addItemWindowController {
     [addItemWindowController close];
-    NSLog(@"項目の追加がキャンセルされました。");
 }
 
 

@@ -24,4 +24,11 @@
     return self;
 }
 
+/**
+ @brief チェックボックスの状態を反転させる
+ */
+- (void)toggleChecked {
+    _isChecked = !_isChecked;
+}
+
 @end
