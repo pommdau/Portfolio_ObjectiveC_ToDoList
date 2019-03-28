@@ -12,7 +12,7 @@
 @interface ToDoListWindowController ()
 @property NSMutableArray<ToDoItem *> *toDoItems;
 @property (weak) IBOutlet NSTableView *toDoListTableView;
-@property (nonatomic, readonly) AddItemWindowController *addItemWindowController;
+@property (nonatomic, readonly) ItemDetailWindowController *editDetailWindowController;
 @end
 
 @implementation ToDoListWindowController
@@ -55,10 +55,10 @@
  @brief 項目を追加するボタン押下時
  */
 - (IBAction)addToDoListItem:(id)sender {
-    AddItemWindowController *addItemWindowController = [[AddItemWindowController alloc] initWithToDoItem:nil];
-    addItemWindowController.delegate = self;
-    [addItemWindowController showWindow:self];
-    _addItemWindowController = addItemWindowController;
+    ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] initWithToDoItem:nil];
+    editDetailWindowController.delegate = self;
+    [editDetailWindowController showWindow:self];
+    _editDetailWindowController = editDetailWindowController;
 }
 
 /**
@@ -94,22 +94,22 @@
     NSInteger row = [_toDoListTableView rowForView:sender];
     NSLog(@"%ld", (long)row);
     
-    AddItemWindowController *addItemWindowController = [[AddItemWindowController alloc] initWithToDoItem:_toDoItems[row]];
-    addItemWindowController.delegate = self;
-    [addItemWindowController showWindow:self];
-    _addItemWindowController = addItemWindowController;
+    ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] initWithToDoItem:_toDoItems[row]];
+    editDetailWindowController.delegate = self;
+    [editDetailWindowController showWindow:self];
+    _editDetailWindowController = editDetailWindowController;
 }
 
-#pragma mark - AddItemWindowControllerDelegate Methods
+#pragma mark - EditDetailWindowControllerDelegate Methods
 
-- (void)AddItemWindowController:(AddItemWindowController *)addItemWindowController didOKWithToDoItem:(ToDoItem *)toDoItem {
-    [addItemWindowController close];
+- (void)EditDetailWindowController:(ItemDetailWindowController *)editDetailWindowController didOKWithToDoItem:(ToDoItem *)toDoItem {
+    [editDetailWindowController close];
     [_toDoItems addObject:toDoItem];
     [_toDoListTableView reloadData];
 }
 
-- (void)AddItemWindowControllerDidCancel:(AddItemWindowController *)addItemWindowController {
-    [addItemWindowController close];
+- (void)EditDetailWindowControllerDidCancel:(ItemDetailWindowController *)editDetailWindowController {
+    [editDetailWindowController close];
 }
 
 

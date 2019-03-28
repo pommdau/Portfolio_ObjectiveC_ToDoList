@@ -1,15 +1,15 @@
 //
-//  AddItemWindowController.m
+//  EditDetailWindowController.m
 //  ToDoList
 //
 //  Created by HIROKI IKEUCHI on 2019/03/27.
 //  Copyright © 2019年 hikeuchi. All rights reserved.
 //
 
-#import "AddItemWindowController.h"
+#import "ItemDetailWindowController.h"
 #import "ToDoItem.h"
 
-@interface AddItemWindowController ()
+@interface ItemDetailWindowController ()
 @property (weak) IBOutlet NSPopUpButton *priority_input;
 @property (weak) IBOutlet NSTextField   *name_input;
 @property (weak) IBOutlet NSTextField   *place_input;
@@ -18,7 +18,7 @@
 @property (weak) IBOutlet NSButton      *okButton;
 @end
 
-@implementation AddItemWindowController
+@implementation ItemDetailWindowController
 - (id)initWithToDoItem:(ToDoItem *)toDoItem {
     self = [super initWithWindowNibName:[self className] owner:self];
     if (self) {
@@ -41,13 +41,13 @@
 
 - (IBAction)okButtonPush:(id)sender {
     ToDoItem *newItem = [ToDoItem new];
-    newItem.name = _name_input.stringValue;
-    newItem.priority = _priority_input.selectedItem.title;
-    [_delegate AddItemWindowController:self didOKWithToDoItem:newItem];
+    newItem.name      = _name_input.stringValue;
+    newItem.priority  = _priority_input.selectedItem.title;
+    [_delegate EditDetailWindowController:self didOKWithToDoItem:newItem];
 }
 
 - (IBAction)cancelButtonPush:(id)sender {
-    [_delegate AddItemWindowControllerDidCancel:self];
+    [_delegate EditDetailWindowControllerDidCancel:self];
 }
 
 
