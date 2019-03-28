@@ -13,6 +13,8 @@
 @property NSMutableArray<ToDoItem *> *toDoItems;
 @property (weak) IBOutlet NSTableView *toDoListTableView;
 @property (nonatomic, readonly) ItemDetailWindowController *editDetailWindowController;
+@property (weak) IBOutlet NSButton *editButton;
+@property (weak) IBOutlet NSButton *removeButton;
 @end
 
 @implementation ToDoListWindowController
@@ -22,7 +24,12 @@
     if (self) {
         _toDoItems = [NSMutableArray array];
         ToDoItem *sample1 = [ToDoItem new];
+        ToDoItem *sample2 = [ToDoItem new];
+        ToDoItem *sample3 = [ToDoItem new];
         [_toDoItems addObject:sample1];
+        [_toDoItems addObject:sample2];
+        [_toDoItems addObject:sample3];
+        
         [_toDoListTableView reloadData];
     }
     return self;
@@ -48,6 +55,19 @@
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:identifier owner:self];
     cellView.objectValue = [data valueForKey:identifier];
     return cellView;
+}
+
+/**
+ @brief テーブルの行の選択状態によって、ボタンのEnableを変更する
+ */
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    if (_toDoListTableView.selectedRow == -1) {
+        _editButton.enabled   = NO;
+        _removeButton.enabled = NO;
+    } else {
+        _editButton.enabled   = YES;
+        _removeButton.enabled = YES;
+    }
 }
 
 #pragma mark - Button Methods
