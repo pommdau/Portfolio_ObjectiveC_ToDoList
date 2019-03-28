@@ -230,7 +230,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="9Kz-1u-bze">
-                                                    <rect key="frame" x="453.5" y="7" width="100" height="17"/>
+                                                    <rect key="frame" x="454" y="7" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="500-wu-vjb">
@@ -267,10 +267,10 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Kri-As-Sxe">
-                                                    <rect key="frame" x="557.5" y="7" width="64" height="17"/>
+                                                    <rect key="frame" x="558" y="7" width="64" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k0A-Tz-naB">
+                                                        <button identifier="editButtonInRow" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k0A-Tz-naB">
                                                             <rect key="frame" x="20" y="-5" width="25" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NaT-8g-o1I">
@@ -278,7 +278,7 @@
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
-                                                                <action selector="editSelectedToDoListItem:" target="-2" id="eou-w4-gU9"/>
+                                                                <action selector="editSelectedToDoListItem:" target="-2" id="mL6-6M-0Si"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -317,13 +317,16 @@
                             <action selector="addToDoListItem:" target="-2" id="LPI-R4-pFJ"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wA1-hP-2Yb">
+                    <button identifier="editButton" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wA1-hP-2Yb">
                         <rect key="frame" x="643" y="192" width="81" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BYq-fw-SI3">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="editSelectedToDoListItem:" target="-2" id="rBr-KJ-s8B"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quD-RX-339">
                         <rect key="frame" x="643" y="159" width="81" height="32"/>

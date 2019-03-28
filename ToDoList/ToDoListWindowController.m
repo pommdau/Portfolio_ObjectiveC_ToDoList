@@ -93,7 +93,6 @@
         NSBeep();
         return;
     }
-    
     [_toDoItems removeObjectsAtIndexes:rows];
     [_toDoListTableView reloadData];
 }
@@ -111,7 +110,15 @@
 
 - (IBAction)editSelectedToDoListItem:(id)sender {
     // どの行が選択されているか
-    NSInteger row = [_toDoListTableView rowForView:sender];
+    NSInteger row;
+    if ([[sender identifier] isEqualToString:@"editButtonInRow"]) {     // tableView内のボタンが押下された場合
+        row = [_toDoListTableView rowForView:sender];
+    } else if ([[sender identifier] isEqualToString:@"editButton"]) {   // tableViewのRowを選択してEditが押下された場合
+        row = _toDoListTableView.selectedRow;
+    } else {
+        NSLog(@"select row error");
+        return;
+    }
     
     ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] initWithToDoItem:_toDoItems[row]];
     editDetailWindowController.delegate = self;
