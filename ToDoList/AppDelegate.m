@@ -7,9 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "ToDoListWindowController.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic, readonly) ToDoListWindowController *toDoListWindowController;
 @property (weak) IBOutlet NSWindow *window;
 @end
 
@@ -17,6 +18,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    ToDoListWindowController *toDoListWindowController = [[ToDoListWindowController alloc] init];
+    [toDoListWindowController showWindow:self];
+    _toDoListWindowController = toDoListWindowController;
 }
 
 
