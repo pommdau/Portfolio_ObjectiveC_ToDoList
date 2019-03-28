@@ -92,7 +92,6 @@
 - (IBAction)editSelectedToDoListItem:(id)sender {
     // どの行が選択されているか
     NSInteger row = [_toDoListTableView rowForView:sender];
-    NSLog(@"%ld", (long)row);
     
     ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] initWithToDoItem:_toDoItems[row]];
     editDetailWindowController.delegate = self;
@@ -104,7 +103,12 @@
 
 - (void)EditDetailWindowController:(ItemDetailWindowController *)editDetailWindowController didOKWithToDoItem:(ToDoItem *)toDoItem {
     [editDetailWindowController close];
-    [_toDoItems addObject:toDoItem];
+    NSInteger replaceIndex = [_toDoItems indexOfObject:toDoItem];    // 編集されている場合はその項目のRowを取得する
+    if (replaceIndex == NSNotFound) {
+        [_toDoItems addObject:toDoItem];
+    } else {
+        [_toDoItems replaceObjectAtIndex: replaceIndex withObject:toDoItem];
+    }
     [_toDoListTableView reloadData];
 }
 

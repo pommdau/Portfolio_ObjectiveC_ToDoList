@@ -16,6 +16,7 @@
 @property (weak) IBOutlet NSDatePicker  *startDate_input;
 @property (weak) IBOutlet NSDatePicker  *limitDate_input;
 @property (weak) IBOutlet NSButton      *okButton;
+@property ToDoItem *toDoItem;   // toDoリストのアイテム
 @end
 
 @implementation ItemDetailWindowController
@@ -23,10 +24,11 @@
     self = [super initWithWindowNibName:[self className] owner:self];
     if (self) {
         if (toDoItem == nil) {
+            _toDoItem = [ToDoItem new];
             return self;    // 新規に項目を追加する場合
         }
         // 既存の項目を編集する場合
-        
+        _toDoItem = toDoItem;
     }
     return self;
 }
@@ -35,15 +37,16 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    _name_input.stringValue = _toDoItem.name;
 }
 
 #pragma mark - Button Methods
 
 - (IBAction)okButtonPush:(id)sender {
-    ToDoItem *newItem = [ToDoItem new];
-    newItem.name      = _name_input.stringValue;
-    newItem.priority  = _priority_input.selectedItem.title;
-    [_delegate EditDetailWindowController:self didOKWithToDoItem:newItem];
+//    _toDoItem.priority  = _priority_input.selectedItem.title;
+    _toDoItem.name      = _name_input.stringValue;
+//    _toDoItem.place     = _place_input.stringValue;
+    [_delegate EditDetailWindowController:self didOKWithToDoItem:_toDoItem];
 }
 
 - (IBAction)cancelButtonPush:(id)sender {
