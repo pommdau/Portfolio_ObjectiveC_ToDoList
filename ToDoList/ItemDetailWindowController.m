@@ -37,15 +37,23 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    _name_input.stringValue = _toDoItem.name;
+    // 入力フィールドに各値をセットする
+    [_priority_input selectItemWithTitle: _toDoItem.priority];
+    _name_input.stringValue  = _toDoItem.name;
+    _place_input.stringValue = _toDoItem.place;
+    _startDate_input.dateValue = _toDoItem.startDate;
+    _limitDate_input.dateValue = _toDoItem.limitDate;
 }
 
 #pragma mark - Button Methods
 
 - (IBAction)okButtonPush:(id)sender {
-//    _toDoItem.priority  = _priority_input.selectedItem.title;
+    _toDoItem.priority  = _priority_input.selectedItem.title;
     _toDoItem.name      = _name_input.stringValue;
-//    _toDoItem.place     = _place_input.stringValue;
+    _toDoItem.place     = _place_input.stringValue;
+    _toDoItem.startDate = _startDate_input.dateValue;
+    _toDoItem.limitDate = _limitDate_input.dateValue;
+    
     [_delegate EditDetailWindowController:self didOKWithToDoItem:_toDoItem];
 }
 

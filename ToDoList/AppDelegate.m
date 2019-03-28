@@ -21,7 +21,6 @@
     ToDoListWindowController *toDoListWindowController = [[ToDoListWindowController alloc] init];
     [toDoListWindowController showWindow:self];
     _toDoListWindowController = toDoListWindowController;
-    
 }
 
 

@@ -14,9 +14,9 @@
     self = [super init];
     if (self) {
         _isChecked = NO;
-        _priority  = @"nil";
+        _priority  = @"None";
         _name      = @"new item";
-        _place     = @"place";
+        _place     = @"自宅";
         _startDate = [NSDate date];
         _limitDate = [NSDate date];
         _isEnableEditButton = YES;
