@@ -23,12 +23,9 @@
 - (id)initWithToDoItem:(ToDoItem *)toDoItem {
     self = [super initWithWindowNibName:[self className] owner:self];
     if (self) {
-        if (toDoItem == nil) {
-            _toDoItem = [ToDoItem new];
-            return self;    // 新規に項目を追加する場合
+        if (toDoItem != nil) {
+            _toDoItem = toDoItem;
         }
-        // 既存の項目を編集する場合
-        _toDoItem = toDoItem;
     }
     return self;
 }
@@ -37,10 +34,18 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    if (_toDoItem == nil) {     // 新規に項目を追加する場合
+        _toDoItem = [ToDoItem new];
+        self.window.title = @"Add Item";
+    } else {
+        // 既存の項目を編集する場合
+        self.window.title = @"Edit Item";
+    }
+    
     // 入力フィールドに各値をセットする
     [_priority_input selectItemWithTitle: _toDoItem.priority];
-    _name_input.stringValue  = _toDoItem.name;
-    _place_input.stringValue = _toDoItem.place;
+    _name_input.stringValue    = _toDoItem.name;
+    _place_input.stringValue   = _toDoItem.place;
     _startDate_input.dateValue = _toDoItem.startDate;
     _limitDate_input.dateValue = _toDoItem.limitDate;
 }
