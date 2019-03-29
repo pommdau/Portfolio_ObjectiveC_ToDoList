@@ -9,6 +9,8 @@
 #import "ToDoListWindowController.h"
 #import "ToDoItem.h"
 
+static NSString *const kToDoItemsKey = @"ToDoItems";    // ToDoリストの項目リスト
+
 @interface ToDoListWindowController ()
 @property NSMutableArray<ToDoItem *> *toDoItems;
 @property (weak) IBOutlet NSTableView *toDoListTableView;
@@ -22,15 +24,7 @@
 - (id)init {
     self = [super initWithWindowNibName:[self className] owner:self];
     if (self) {
-        _toDoItems = [NSMutableArray array];
-        ToDoItem *sample1 = [ToDoItem new];
-        ToDoItem *sample2 = [ToDoItem new];
-        ToDoItem *sample3 = [ToDoItem new];
-        [_toDoItems addObject:sample1];
-        [_toDoItems addObject:sample2];
-        [_toDoItems addObject:sample3];
-        
-        [_toDoListTableView reloadData];
+        [self loadToDoListItems];
     }
     return self;
 }
@@ -39,6 +33,32 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+}
+
+#pragma mark - User Default
+
+/**
+ @brief 現在の状態をUserDefaultで登録する
+ */
+- (void)saveToDoListItems {
+    // 各種プロパテイ、UserDefaultの初期化（既に値がセットされていれば上書きしない）
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSData *toDoItems = [NSKeyedArchiver archivedDataWithRootObject: _toDoItems];   // アーカイブ化してToDoListの項目を登録する
+    [ud setObject: toDoItems forKey:kToDoItemsKey];
+    [ud synchronize];
+}
+
+/**
+ @brief UserDefaultで保存された値を読み込む
+ */
+- (void)loadToDoListItems {
+    _toDoItems = [NSMutableArray array];
+    // NSUserDefaultsからデータを読み込む
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];  // 取得
+    NSData *data = [ud dataForKey:kToDoItemsKey];
+    if (data.length != 0) {
+        _toDoItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
 }
 
 #pragma mark - NSTableView data source
@@ -75,7 +95,7 @@
  @brief 項目を追加するボタン押下時
  */
 - (IBAction)addToDoListItem:(id)sender {
-    ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] initWithToDoItem:nil];
+    ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] init];
     editDetailWindowController.delegate = self;
     [editDetailWindowController showWindow:self];
     _editDetailWindowController = editDetailWindowController;
@@ -95,10 +115,10 @@
         return;
     }
     [_toDoItems removeObjectsAtIndexes:rows];
+    [self saveToDoListItems];
     
     _editButton.enabled = NO;
     _removeButton.enabled = NO;
-    
     [_toDoListTableView reloadData];
 }
 
@@ -111,6 +131,7 @@
         return;
     }
     [_toDoItems[row] toggleChecked];
+    [self saveToDoListItems];
 }
 
 - (IBAction)editSelectedToDoListItem:(id)sender {
@@ -121,11 +142,12 @@
     } else if ([[sender identifier] isEqualToString:@"editButton"]) {   // tableViewのRowを選択してEditが押下された場合
         row = _toDoListTableView.selectedRow;
     } else {
-        NSLog(@"select row error");
+        NSLog(@"select editbutton error");
         return;
     }
     
-    ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] initWithToDoItem:_toDoItems[row]];
+    ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] init];
+    editDetailWindowController.toDoItem = _toDoItems[row];
     editDetailWindowController.delegate = self;
     [editDetailWindowController showWindow:self];
     _editDetailWindowController = editDetailWindowController;
@@ -141,6 +163,9 @@
     } else {
         [_toDoItems replaceObjectAtIndex: replaceIndex withObject:toDoItem];
     }
+    
+    [self saveToDoListItems];
+    
     [_toDoListTableView reloadData];
 }
 
