@@ -13,8 +13,8 @@
 
 @interface ItemDetailWindowController : NSWindowController
 @property (nonatomic, weak) id<EditDetailWindowControllerDelegate> delegate;
+@property ToDoItem *toDoItem;   // toDoリストのアイテム
 
-- (id)initWithToDoItem:(ToDoItem *)toDoItem;
 @end
 
 

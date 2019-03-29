@@ -16,16 +16,12 @@
 @property (weak) IBOutlet NSDatePicker  *startDate_input;
 @property (weak) IBOutlet NSDatePicker  *limitDate_input;
 @property (weak) IBOutlet NSButton      *okButton;
-@property ToDoItem *toDoItem;   // toDoリストのアイテム
 @end
 
 @implementation ItemDetailWindowController
-- (id)initWithToDoItem:(ToDoItem *)toDoItem {
+- (id)init {
     self = [super initWithWindowNibName:[self className] owner:self];
     if (self) {
-        if (toDoItem != nil) {
-            _toDoItem = toDoItem;
-        }
     }
     return self;
 }

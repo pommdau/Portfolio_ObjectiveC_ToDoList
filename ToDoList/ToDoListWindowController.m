@@ -75,7 +75,7 @@
  @brief 項目を追加するボタン押下時
  */
 - (IBAction)addToDoListItem:(id)sender {
-    ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] initWithToDoItem:nil];
+    ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] init];
     editDetailWindowController.delegate = self;
     [editDetailWindowController showWindow:self];
     _editDetailWindowController = editDetailWindowController;
@@ -125,7 +125,8 @@
         return;
     }
     
-    ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] initWithToDoItem:_toDoItems[row]];
+    ItemDetailWindowController *editDetailWindowController = [[ItemDetailWindowController alloc] init];
+    editDetailWindowController.toDoItem = _toDoItems[row];
     editDetailWindowController.delegate = self;
     [editDetailWindowController showWindow:self];
     _editDetailWindowController = editDetailWindowController;
